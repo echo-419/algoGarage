@@ -1,0 +1,202 @@
+Algo_Garage_AUTO
+//BUT: Voir les cararctéristiques de voitures qui son dans des garages
+//ENTRER:les cararctéristiques des voitures et des garages
+//SORTIE:
+
+//PARTIE MANQUANTE:	-les fonctions de validation de saisie( verif_CP,verif_tel, verif_mail, verif_marque,verif_nrj)
+					-les fontions de calcule ( calcul_argus, calcul_age)
+					-la fonction de génération de plaque
+					-le tableau d'association des voitures aux garages
+
+
+
+
+
+
+CONSTANTE
+	nb_voiture=6:ENTIER
+	
+
+TYPE 
+	//valeurs de l'adresse
+	identification=ENGRGISTREMENT
+		numéro=ENTIER
+		voie=ENTIER
+		CP=ENTIER
+		ville=CHAINE
+		pays=CHAINE
+		numero_tel=ENTIER
+		email=CHAINE
+	FINENREGISTREMENT
+
+	//caracteristique d'un garage
+	garage=ENGRGISTREMENT
+		noms=CHAINE
+		adresse=identification
+		capacité=ENTIER
+	FINENREGISTREMENT
+
+	//caracrteristique d'une voiture
+	voiture=ENREGISTREMENT
+		marque=CHAINE
+		modele=CHAINE
+		energie=CHAINE
+		puissance_fiscal=ENTIER
+		puissance_DYN=ENTIER
+		couleur=CHAINE
+		option=CHAINE
+		annee_model=ENTIER
+		prix=ENTIER
+		argus=ENTIER
+		date_circulation=CHAINE
+		age=ENTIER
+		plaque=CHAINE
+	FINENREGISTREMENT
+
+	tab_garage=TABLEAU[1..2] DE garage
+
+	tab_voiture=TABLEAU[1..nb_voiture] DE voiture
+
+FINTYPE
+
+//
+
+//remplissage liste de garage
+PROCEDURE liste_garage(var tableau_g:tableau_garage )
+
+VAR
+	i,num,num_tel,CoP,tel,place:ENTIER
+	mail,pay,vil,voy,nom:CHAINE
+
+DEBUT
+	POUR i DE 1 A 2
+		ECRIRE" entrer le nom du garage"
+		LIRE nom
+		tableau_g[i].noms<-nom
+
+		ECRIRE" entrer le numero du garage"
+		LIRE num
+		tableau_g[i].adresse.numéro<-num
+
+		ECRIRE" entrer la voie du garage"
+		LIRE voy
+		tableau_g[i].adresse.voie<-voy
+
+		REPETER
+			ECRIRE" entrer le code postal du garage"
+			LIRE CoP
+		JUSQU'A verif_CP=VRAI
+		tableau_g[i].adresse.CP<-CoP
+
+		ECRIRE" entrer la ville du garage"
+		LIRE vil
+		tableau_g[i].adresse.ville<-vil
+
+		ECRIRE" entrer le pays du garage"
+		LIRE pay
+		tableau_g[i].adresse.pays<-pay
+
+		REPETER
+			ECRIRE" entrer le numero de telephone du garage"
+			LIRE num_tel
+		JUSQU'A verif_tel=VRAI
+		tableau_g[i].adresse.numero_tel<-num_tel
+
+		REPETER
+			ECRIRE" entrer le mail du garage"
+			LIRE mail
+		JUSQU'A verif_mail=VRAI
+		tableau_g[i].adresse.email<-mail
+	FINPOUR
+FIN
+
+//remplissage liste de voiture
+PROCEDURE liste_garage(var tableau_v:tableau_voiture )
+
+VAR
+	mrq,mdl,nrj,clr,opt,dt_c,ann_mdl:CHAINE
+	i,p_fis,P_DY,pri:ENTIER
+			
+DEBUT
+	POUR i DE 1 A nb_voiture FAIRE
+		REPETER
+			ECRIRE"entrer la marque de la voiture.( renaud, peugot, BMW, audi, opel, infiniti)"
+			LIRE mrq
+		JUSQU'A verif_marque=VRAI
+		tableau_v[i].marque<-mrq
+
+		ECRIRE"entrer le model de la voiture"
+		LIRE mdl
+		tableau_v[i].marque<-mrq
+
+		REPETER
+			ECRIRE"entrer le carburant de la voiture.( essence, GPL, Electrique, Hybride)"
+			LIRE nrj
+		JUSQU'A verif_nrj=VRAI
+		tableau_v[i].energie<-nrj
+
+		ECRIRE"entrer la puissance fiscal de la voiture"
+		LIRE p_fis
+		tableau_v[i].puissance_fiscal<-p_fis
+
+		ECRIRE"entrer la puissance DYN de la voiture"
+		LIRE P_DY
+		tableau_v[i].puissance_DYN<-P_DY
+
+		ECRIRE"entrer la couleur de la voiture"
+		LIRE clr
+		tableau_v[i].couleur<-clr
+
+		ECRIRE"entrer les option de la voiture"
+		LIRE opt
+		tableau_v[i].option<-opt
+
+		ECRIRE"entrer l'année de la voiture"
+		LIRE ann
+		tableau_v[i].annee_model<-ann
+
+		ECRIRE"entrer le prix de la voiture"
+		LIRE pri
+		tableau_v[i].prix<-pri
+
+		tableau_v[i].argus<-calcul_argus
+
+		tableau_v[i].age<-calcul_age
+
+		RIRE"entrer la date de circulation de la voiture"
+		LIRE dt_c
+		tableau_v[i].annee_model<-dt_c
+
+		tableau_v[i].plaque<-generateur_plaque
+
+	FINPOUR
+FIN
+
+
+
+
+
+
+
+
+
+		
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
